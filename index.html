@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="array()">Array Example</button>
+    <p id="output"></p>
+    <button onclick="object()">Object Example</button>
+    <p id="objOutput"></p>
+    <button onclick="arrayMethods()">Array Methods Example</button>
+    <p id="arrOutput"></p>
+    <p>Enter two numbers:</p>
+  <input type="number" id="num1" placeholder="Enter num1"><br><br>
+  <input type="number" id="num2" placeholder="Enter num2"><br><br>
+
+  <button onclick="calc('add')">Add</button>
+  <button onclick="calc('sub')">Sub</button>
+  <button onclick="calc('mul')">Mul</button>
+  <button onclick="calc('div')">Div</button>
+  <p id="result"></p>
+
+    <script>
+        function array() {
+          const animals = ["Dog", "Cat", "Lion"];
+          animals.push("Tiger");
+          animals.shift();
+          document.getElementById("output").innerText = `Animals Name: ${animals.join(", ")}`;
+        }
+        function object() {
+          const person = {
+            name: "Thanya",
+            age: 20,
+        };
+
+     
+         person.age = 21;
+         person.profession = "Software Developer";
+         const output = `Name: ${person.name}, Age: ${person.age}, Profession: ${person.profession}`;
+         document.getElementById("objOutput").innerText = output;
+       }
+    function arrayMethods() {
+      const num = [1, 6, 4, 8, 2];
+
+      const doub = num.map(num => num * 2);
+      const filt = doub.filter(num => num > 5);
+      const sum = filt.reduce((acc, num) => acc + num, 0);
+
+      document.getElementById("arrOutput").innerText = `
+        original: ${num.join(", ")}
+        doubled: ${doub.join(", ")}
+        filtered: ${filt.join(", ")}
+        sum: ${sum}
+      `;
+    }
+    
+    const calculator = {
+      a: 0,
+      b: 0,
+      setValues(a, b) {
+        this.a = a;
+        this.b = b;
+      },
+      addop() {
+        return this.a + this.b;
+      },
+      subop() {
+        return this.a - this.b;
+      },
+      mulop() {
+        return this.a * this.b;
+      },
+      divop() {
+        return this.b !== 0 ? (this.a / this.b) : "Error: Division by zero!";
+      }
+    };
+
+    function calc(op) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+
+    
+      calculator.setValues(num1, num2);
+
+      let res;
+      switch (op) {
+        case "add":
+          res = calculator.addop();
+          break;
+        case "sub":
+          res = calculator.subop();
+          break;
+        case "mul":
+          res = calculator.mulop();
+          break;
+        case "div":
+          res = calculator.divop();
+          break;
+        default:
+          res = "Unknown operation!";
+      }
+
+      document.getElementById("result").innerText = `${res}`;
+    }
+    </script>
+</body>
+</html>
